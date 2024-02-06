@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'IconContent.dart';
-import 'package:bmi_calculator/CardWidget.dart';
-import 'constants.dart';
+import '../components/IconContent.dart';
+import '../components/CardWidget.dart';
+import 'ResultPage.dart';
+import '../components/constants.dart';
+import '../components/BottomButton.dart';
+import 'package:bmi_calculator/Calculator.dart';
 
 /// Enum to help set the right role (because of null safety I had to add in neither) ///
 enum Gender { male, female, neither }
@@ -239,21 +242,23 @@ class _InputPageState extends State<InputPage> {
                 ],
               ),
             ),
-            Container(
-              color: kBottomContainerColor,
-              height: kBottomContainerHeight,
-              child: Center(
-                  child: ElevatedButton(
-                    onPressed: (){setState(() {
-                      Navigation.push(context,MaterialPageRoute(builder: (context){
-                        return SecondPage();
-                      }))
-                    });},
-                    child: Text(
-                                    'CALCULATE',
-                                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.w800),
-                                  ),
-                  )),
+
+            /// Setting up a connection to the next page ///
+            BottomButton(
+              buttonTitle: 'CALCULATE',
+              onTap: () {
+                CalculatorBrain calc =
+                    CalculatorBrain(height: height, weight: weight);
+
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ResultPage(
+                              bmiResult: calc.calculatorBMI(),
+                              resulttext: calc.getResults(),
+                              interpretation: calc.getInterpetation(),
+                            )));
+              },
             )
           ],
         ));

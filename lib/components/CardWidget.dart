@@ -18,8 +18,8 @@ class cardWidget extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.all(15.0),
         child: cardChild,
-        decoration:
-        BoxDecoration(color: colour, borderRadius: BorderRadius.circular(20)),
+        decoration: BoxDecoration(
+            color: colour, borderRadius: BorderRadius.circular(20)),
       ),
     );
   }
