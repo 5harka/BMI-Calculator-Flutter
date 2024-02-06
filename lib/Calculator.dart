@@ -6,29 +6,31 @@ class CalculatorBrain {
   final int height;
   final int weight;
 
-  double _bmi = 0;
+  double bmi = 0;
+
   String calculatorBMI() {
-    double _bmi = weight / pow(height / 100, 2);
-    return _bmi.toStringAsFixed(1);
+    bmi = weight / pow(height / 100, 2); // Update the bmi field here
+    return bmi.toStringAsFixed(1);
   }
 
   String getResults() {
-    if (_bmi >= 25) {
+    print(bmi);
+    if (bmi >= 25) {
       return 'Overweight';
-    } else if (_bmi > 18.5) {
-      return 'Normal';
-    } else {
+    } else if (bmi < 18.5) {
       return 'Underweight';
+    } else {
+      return 'Normal';
     }
   }
 
-  String getInterpetation() {
-    if (_bmi >= 25) {
-      return 'You have aa higer than normal BMI, Try to exercise more.';
-    } else if (_bmi > 18.5) {
-      return 'You have a normal body weight. Good Job!';
+  String getInterpretation() {
+    if (bmi >= 25) {
+      return 'You have a higher than normal BMI, Try to exercise more.';
+    } else if (bmi < 18.5) {
+      return 'You have a lower than normal BMI, Try to avoid being in a calorie deficit.';
     } else {
-      return 'You have a lower than normal BMI, Try to avoid being in a calorie deficit';
+      return 'You have a normal body weight. Good Job!';
     }
   }
 }
